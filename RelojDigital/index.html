@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/null/digital-clock.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            height: 58.563rem;
+        }
+        .wrapper {
+            height: 100%;
+            width: 100%;
+            background-color: #101010;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #tiempo {
+            border: 1px solid #000000;
+        }
+
+        .wrapper .display #tiempo {
+            line-height: 85px;
+            font-size: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #14ffe9, #ff3b3b, #ff00e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: trasparent;
+            animation: animate 1.5s linear infinite;
+        }
+
+        @keyframes animate {
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .wrapper span {
+            height: 100%;
+            width: 100%;
+            background: transparent;
+            border-radius: 10px;
+        }
+
+        .wrapper span:first-child {
+            filter: blur(10px);
+        }
+
+        .wrapper span:last-child {
+            filter: blur(20px);
+        }
+    </style>
+    <title>Reloj Digital</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="display">
+            <div id="tiempo">12:00:00 PM</div>
+        </div>
+        <span></span>
+        <span></span>
+    </div>
+<script>
+    setInterval(()=>{
+        const tiempo = document.querySelector("#tiempo");
+        let date = new Date();
+        let hora = date.getHours();
+        let minutos = date.getMinutes();
+        let segundos = date.getSeconds();
+        let dia_noche = "AM";
+        if(hora > 12){
+            dia_noche = "PM";
+            hora = hora -12;
+        }
+        if(segundos < 10){
+            segundos = "0" + segundos;
+        }
+        if(minutos < 10){
+            minutos = "0" + minutos;
+        }
+        if(hora < 10){
+            hora = "0" + hora;
+        }
+        tiempo.textContent = hora + ":" + minutos + ":" + segundos + " " + dia_noche;
+    });
+</script>
+</body>
+</html>
